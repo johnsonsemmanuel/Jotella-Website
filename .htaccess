@@ -1,0 +1,21 @@
+# Jotella Aged Home Care — Apache settings for Namecheap hosting
+
+# Always use the secure https:// address without "www"
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://jotellaagedhomecare.com%{REQUEST_URI} [L,R=301]
+
+# Cache images, CSS and JS so repeat visits load faster
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType text/css "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
+</IfModule>
+
+# Compress text files
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
